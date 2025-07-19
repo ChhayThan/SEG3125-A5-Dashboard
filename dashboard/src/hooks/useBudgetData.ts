@@ -2,67 +2,64 @@ import { useState, useEffect } from "react";
 import type { Month, Income, Expense } from "../types/type";
 
 const getInitialData = (): Month[] => {
-  return [
-    {
-      id: "month-1",
-      name: "Month 1",
-      incomes: [{ id: "inc-1", amount: 5000, date: "2025-05-01" }],
-      expenses: [
-        { id: "exp-1", amount: 1500, date: "2025-05-01", category: "Rent" },
-        { id: "exp-2", amount: 450, date: "2025-05-05", category: "Food" },
+  const months: Month[] = [];
+  const currentYear = new Date().getFullYear() - 1;
+  for (let i = 0; i < 12; i++) {
+    // const monthDate = new Date(currentYear, i, 1);
+    const monthString = (i + 1).toString().padStart(2, "0");
+
+    const incomeAmount = 4800 + Math.random() * 800;
+    const rent = 1500;
+    const food = 400 + Math.random() * 200;
+    const transport = 100 + Math.random() * 100;
+    const entertainment = 150 + Math.random() * 200;
+    const other = 50 + Math.random() * 150;
+
+    months.push({
+      id: `month-${i + 1}`,
+      name: `Month ${i + 1}`,
+      incomes: [
         {
-          id: "exp-3",
-          amount: 120,
-          date: "2025-05-10",
+          id: `inc-${i + 1}`,
+          amount: parseFloat(incomeAmount.toFixed(2)),
+          date: `${currentYear}-${monthString}-01`,
+        },
+      ],
+      expenses: [
+        {
+          id: `exp-${i + 1}-1`,
+          amount: rent,
+          date: `${currentYear}-${monthString}-01`,
+          category: "Rent",
+        },
+        {
+          id: `exp-${i + 1}-2`,
+          amount: parseFloat(food.toFixed(2)),
+          date: `${currentYear}-${monthString}-05`,
+          category: "Food",
+        },
+        {
+          id: `exp-${i + 1}-3`,
+          amount: parseFloat(transport.toFixed(2)),
+          date: `${currentYear}-${monthString}-10`,
           category: "Transportation",
         },
         {
-          id: "exp-4",
-          amount: 250,
-          date: "2025-05-15",
+          id: `exp-${i + 1}-4`,
+          amount: parseFloat(entertainment.toFixed(2)),
+          date: `${currentYear}-${monthString}-15`,
           category: "Entertainment",
         },
-        { id: "exp-5", amount: 80, date: "2025-05-20", category: "Other" },
-      ],
-    },
-    {
-      id: "month-2",
-      name: "Month 2",
-      incomes: [{ id: "inc-2", amount: 5200, date: "2025-06-01" }],
-      expenses: [
-        { id: "exp-6", amount: 1500, date: "2025-06-01", category: "Rent" },
-        { id: "exp-7", amount: 500, date: "2025-06-06", category: "Food" },
         {
-          id: "exp-8",
-          amount: 150,
-          date: "2025-06-11",
-          category: "Transportation",
-        },
-        {
-          id: "exp-9",
-          amount: 180,
-          date: "2025-06-16",
-          category: "Entertainment",
+          id: `exp-${i + 1}-5`,
+          amount: parseFloat(other.toFixed(2)),
+          date: `${currentYear}-${monthString}-20`,
+          category: "Other",
         },
       ],
-    },
-    {
-      id: "month-3",
-      name: "Month 3",
-      incomes: [{ id: "inc-3", amount: 4800, date: "2025-07-01" }],
-      expenses: [
-        { id: "exp-10", amount: 1500, date: "2025-07-01", category: "Rent" },
-        { id: "exp-11", amount: 400, date: "2025-07-07", category: "Food" },
-        { id: "exp-12", amount: 300, date: "2025-07-12", category: "Other" },
-        {
-          id: "exp-13",
-          amount: 300,
-          date: "2025-07-18",
-          category: "Entertainment",
-        },
-      ],
-    },
-  ];
+    });
+  }
+  return months;
 };
 
 export const useBudgetData = () => {

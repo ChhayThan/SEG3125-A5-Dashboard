@@ -22,6 +22,7 @@ export const TransactionList: FC<TransactionListProps> = ({
     transaction: Income | Expense,
     type: "income" | "expense"
   ) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const isExpense = (t: any): t is Expense => t.category !== undefined;
     return (
       <div

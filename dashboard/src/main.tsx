@@ -12,16 +12,22 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
+  LineElement,
+  PointElement,
 } from "chart.js";
 
 ChartJS.register(
   ArcElement,
-  BarElement,
+  Tooltip,
+  Legend,
   CategoryScale,
   LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
   Title,
-  Tooltip,
-  Legend
+  Filler
 );
 
 createRoot(document.getElementById("root")!).render(
