@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 import type { Income, Expense, Category } from "../types/type";
 import { CATEGORIES } from "../types/constants";
 
@@ -49,8 +49,8 @@ export const TransactionForm: FC<TransactionFormProps> = ({
     <div className="card bg-base-200 shadow-xl w-full max-w-lg mx-auto">
       <div className="card-body p-6">
         <h2 className="card-title text-xl mb-4">{t("addTransaction")}</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="tabs tabs-boxed grid-cols-2">
+        <form onSubmit={handleSubmit} className="space-y-4p-5">
+          <div className="tabs tabs-lift grid-cols-2">
             <a
               className={`tab ${type === "expense" ? "tab-active" : ""}`}
               onClick={() => setType("expense")}
@@ -65,7 +65,7 @@ export const TransactionForm: FC<TransactionFormProps> = ({
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-5">
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text">{t("amount")}</span>
@@ -96,8 +96,8 @@ export const TransactionForm: FC<TransactionFormProps> = ({
           </div>
 
           {type === "expense" && (
-            <div className="form-control w-full">
-              <label className="label">
+            <div className="form-control w-ful bg-white p-5">
+              <label className="label mr-3">
                 <span className="label-text">{t("category")}</span>
               </label>
               <select

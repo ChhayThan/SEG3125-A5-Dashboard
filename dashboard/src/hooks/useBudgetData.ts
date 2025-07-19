@@ -84,17 +84,16 @@ export const useBudgetData = () => {
     }
   }, [months]);
 
-  const addMonth = () => {
-    setMonths((prev) => {
-      const newMonthName = `Month ${prev.length + 1}`;
-      const newMonth: Month = {
-        id: crypto.randomUUID(),
-        name: newMonthName,
-        incomes: [],
-        expenses: [],
-      };
-      return [...prev, newMonth];
-    });
+  const addMonth = (): string => {
+    const newMonthName = `Month ${months.length + 1}`;
+    const newMonth: Month = {
+      id: crypto.randomUUID(),
+      name: newMonthName,
+      incomes: [],
+      expenses: [],
+    };
+    setMonths((prev) => [...prev, newMonth]);
+    return newMonth.id;
   };
 
   const addTransaction = (
@@ -123,5 +122,32 @@ export const useBudgetData = () => {
     );
   };
 
-  return { months, addMonth, addTransaction };
+  const removeTransaction = (
+    monthId: string,
+    transactionId: string,
+    type: "income" | "expense"
+  ) => {
+    setMonths((prev) =>
+      prev.map((month) => {
+        if (month.id === monthId) {
+          if (type === "income") {
+            return {
+              ...month,
+              incomes: month.incomes.filter((inc) => inc.id !== transactionId),
+            };
+          } else {
+            return {
+              ...month,
+              expenses: month.expenses.filter(
+                (exp) => exp.id !== transactionId
+              ),
+            };
+          }
+        }
+        return month;
+      })
+    );
+  };
+
+  return { months, addMonth, addTransaction, removeTransaction };
 };

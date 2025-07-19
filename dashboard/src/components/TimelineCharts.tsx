@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Pie, Bar } from "react-chartjs-2";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 import { CHART_COLORS } from "../types/constants";
 import type { Month, Category } from "../types/type";
 
@@ -94,7 +94,7 @@ export const TimelineCharts: FC<TimelineChartsProps> = ({ allMonths }) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-      <div className="card bg-base-200 shadow-xl">
+      <div className="card bg-white shadow-xl">
         <div className="card-body">
           {Object.keys(totalExpensesByCategory).length > 0 ? (
             <Pie data={pieChartData} options={pieOptions} />
@@ -105,7 +105,7 @@ export const TimelineCharts: FC<TimelineChartsProps> = ({ allMonths }) => {
           )}
         </div>
       </div>
-      <div className="card bg-base-200 shadow-xl">
+      <div className="card bg-white shadow-xl">
         <div className="card-body">
           <Bar data={barChartData} options={barOptions} />
         </div>

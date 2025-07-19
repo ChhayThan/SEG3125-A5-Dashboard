@@ -1,3 +1,5 @@
+import type { Category } from "./type";
+
 export const CATEGORIES: Category[] = [
   "Rent",
   "Food",

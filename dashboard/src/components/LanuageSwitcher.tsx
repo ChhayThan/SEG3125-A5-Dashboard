@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import { useLanguage } from "../context/LanguageContext";
 import { faLanguage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLanguage } from "../context/useLanguage";
 
 export const LanguageSwitcher: FC = () => {
   const { language, changeLanguage } = useLanguage();

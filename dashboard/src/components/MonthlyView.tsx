@@ -1,16 +1,22 @@
 import { type FC, useState, useEffect, useMemo } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 import type { Month, Income, Expense } from "../types/type";
 import { MonthlyCharts } from "./MonthlyCharts";
-import { TransactionForm } from "./TranscationForm";
+import { TransactionForm } from "./TransactionForm";
+import { TransactionList } from "./TransactionList";
 
 interface MonthlyViewProps {
   months: Month[];
-  addMonth: () => void;
+  addMonth: () => string;
   addTransaction: (
     monthId: string,
     type: "income" | "expense",
     details: Omit<Income, "id"> | Omit<Expense, "id">
+  ) => void;
+  removeTransaction: (
+    monthId: string,
+    transactionId: string,
+    type: "income" | "expense"
   ) => void;
 }
 
@@ -18,6 +24,7 @@ export const MonthlyView: FC<MonthlyViewProps> = ({
   months,
   addMonth,
   addTransaction,
+  removeTransaction,
 }) => {
   const { t } = useLanguage();
   const [selectedMonthId, setSelectedMonthId] = useState<string | null>(
@@ -38,11 +45,16 @@ export const MonthlyView: FC<MonthlyViewProps> = ({
     [months, selectedMonthId]
   );
 
+  const handleAddMonth = () => {
+    const newMonthId = addMonth();
+    setSelectedMonthId(newMonthId);
+  };
+
   if (months.length === 0) {
     return (
       <div className="text-center py-20">
         <p className="text-xl mb-4">{t("noMonths")}</p>
-        <button className="btn btn-primary" onClick={addMonth}>
+        <button className="btn btn-primary" onClick={handleAddMonth}>
           {t("addMonth")}
         </button>
       </div>
@@ -64,7 +76,10 @@ export const MonthlyView: FC<MonthlyViewProps> = ({
             </option>
           ))}
         </select>
-        <button className="btn btn-secondary btn-outline" onClick={addMonth}>
+        <button
+          className="btn btn-secondary btn-outline"
+          onClick={handleAddMonth}
+        >
           {t("addMonth")}
         </button>
       </div>
@@ -73,6 +88,13 @@ export const MonthlyView: FC<MonthlyViewProps> = ({
           <TransactionForm
             onAddTransaction={addTransaction}
             selectedMonthId={selectedMonthId as string}
+          />
+          <TransactionList
+            incomes={selectedMonthData.incomes}
+            expenses={selectedMonthData.expenses}
+            onRemove={(transactionId, type) =>
+              removeTransaction(selectedMonthId as string, transactionId, type)
+            }
           />
           <MonthlyCharts monthData={selectedMonthData} />
         </>

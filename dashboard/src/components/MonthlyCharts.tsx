@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 import { CHART_COLORS } from "../types/constants";
 import type { Month } from "../types/type";
 import { Pie, Bar } from "react-chartjs-2";
@@ -31,7 +31,7 @@ export const MonthlyCharts: FC<MonthlyChartsProps> = ({ monthData }) => {
     ],
   };
   const barChartData = {
-    labels: [monthData.name],
+    labels: [t("month") + " " + monthData.name.split(" ")[1]],
     datasets: [
       {
         label: t("income"),
@@ -71,7 +71,7 @@ export const MonthlyCharts: FC<MonthlyChartsProps> = ({ monthData }) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-      <div className="card bg-base-200 shadow-xl">
+      <div className="card bg-white shadow-xl">
         <div className="card-body">
           {totalExpenses > 0 ? (
             <Pie data={pieChartData} options={pieOptions} />
@@ -82,7 +82,7 @@ export const MonthlyCharts: FC<MonthlyChartsProps> = ({ monthData }) => {
           )}
         </div>
       </div>
-      <div className="card bg-base-200 shadow-xl">
+      <div className="card bg-white shadow-xl">
         <div className="card-body">
           <Bar data={barChartData} options={barOptions} />
         </div>

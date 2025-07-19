@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 import { LanguageSwitcher } from "./LanuageSwitcher";
 
 export const Navbar: FC = () => {
