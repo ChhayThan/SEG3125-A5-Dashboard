@@ -1,11 +1,75 @@
 import { useState, useEffect } from "react";
 import type { Month, Income, Expense } from "../types/type";
 
+const getInitialData = (): Month[] => {
+  return [
+    {
+      id: "month-1",
+      name: "Month 1",
+      incomes: [{ id: "inc-1", amount: 5000, date: "2025-05-01" }],
+      expenses: [
+        { id: "exp-1", amount: 1500, date: "2025-05-01", category: "Rent" },
+        { id: "exp-2", amount: 450, date: "2025-05-05", category: "Food" },
+        {
+          id: "exp-3",
+          amount: 120,
+          date: "2025-05-10",
+          category: "Transportation",
+        },
+        {
+          id: "exp-4",
+          amount: 250,
+          date: "2025-05-15",
+          category: "Entertainment",
+        },
+        { id: "exp-5", amount: 80, date: "2025-05-20", category: "Other" },
+      ],
+    },
+    {
+      id: "month-2",
+      name: "Month 2",
+      incomes: [{ id: "inc-2", amount: 5200, date: "2025-06-01" }],
+      expenses: [
+        { id: "exp-6", amount: 1500, date: "2025-06-01", category: "Rent" },
+        { id: "exp-7", amount: 500, date: "2025-06-06", category: "Food" },
+        {
+          id: "exp-8",
+          amount: 150,
+          date: "2025-06-11",
+          category: "Transportation",
+        },
+        {
+          id: "exp-9",
+          amount: 180,
+          date: "2025-06-16",
+          category: "Entertainment",
+        },
+      ],
+    },
+    {
+      id: "month-3",
+      name: "Month 3",
+      incomes: [{ id: "inc-3", amount: 4800, date: "2025-07-01" }],
+      expenses: [
+        { id: "exp-10", amount: 1500, date: "2025-07-01", category: "Rent" },
+        { id: "exp-11", amount: 400, date: "2025-07-07", category: "Food" },
+        { id: "exp-12", amount: 300, date: "2025-07-12", category: "Other" },
+        {
+          id: "exp-13",
+          amount: 300,
+          date: "2025-07-18",
+          category: "Entertainment",
+        },
+      ],
+    },
+  ];
+};
+
 export const useBudgetData = () => {
   const [months, setMonths] = useState<Month[]>(() => {
     try {
       const savedData = localStorage.getItem("monthlyBudDataV2");
-      return savedData ? JSON.parse(savedData) : [];
+      return savedData ? JSON.parse(savedData) : getInitialData();
     } catch (error) {
       console.error("Error parsing localStorage data:", error);
       return [];
