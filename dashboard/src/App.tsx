@@ -12,10 +12,7 @@ const App: FC = () => {
     useBudgetData();
 
   return (
-    <div
-      data-theme="cupcake"
-      className="min-h-screen bg-base-100 text-base-content font-sans"
-    >
+    <div className="min-h-screen bg-base-100 text-base-content font-sans">
       <Navbar />
       <div className="container mx-auto p-4 sm:p-6 lg:p-8">
         <div
