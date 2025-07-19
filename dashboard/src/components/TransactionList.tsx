@@ -37,19 +37,17 @@ export const TransactionList: FC<TransactionListProps> = ({
             {new Date(transaction.date).toLocaleDateString()}
           </p>
           <p
-            className="text-sm font-mono text-center min-[450px]:hidden"
-            style={{
-              color: type === "expense" ? "hsl(var(--er))" : "hsl(var(--su))",
-            }}
+            className={`text-sm font-mono text-center min-[450px]:hidden font-bold ${
+              type === "expense" ? "text-red-600" : "text-green-600"
+            }`}
           >
             {type === "expense" ? "-" : "+"} ${transaction.amount.toFixed(2)}
           </p>
         </div>
         <div
-          className="text-right md:col-span-2 font-mono max-[451px]:hidden"
-          style={{
-            color: type === "expense" ? "hsl(var(--er))" : "hsl(var(--su))",
-          }}
+          className={`text-right md:col-span-2 font-mono max-[451px]:hidden font-bold ${
+            type === "expense" ? "text-red-600" : "text-green-600"
+          }`}
         >
           {type === "expense" ? "-" : "+"} ${transaction.amount.toFixed(2)}
         </div>
